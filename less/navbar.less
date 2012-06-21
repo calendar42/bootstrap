@@ -19,8 +19,12 @@
   min-height: @navbarHeight;
   padding-left:  20px;
   padding-right: 20px;
-  background: @navbarBackground;
-/*  #gradient > .vertical(@navbarBackgroundHighlight, @navbarBackground);*/
+  
+ background-image: -webkit-gradient(linear,left bottom,left top,color-stop(0.12,#135272),color-stop(0.44,#155778),color-stop(0.89,#1C6389));
+ background-image: -moz-linear-gradient(center bottom,#135272 12%,#155778 44%,#1C6389 89%);
+  
+ /* background: @navbarBackground;
+   #gradient > .vertical(@navbarBackgroundHighlight, @navbarBackground);*/
 /*  .border-radius(4px);*/
 /*  .box-shadow(~"0 1px 3px rgba(0,0,0,.25), inset 0 -1px 0 rgba(0,0,0,.1)");*/
 }
@@ -36,7 +40,11 @@
   height: auto;
 }
 
-
+.navbar.magicbox {
+	.navbar-inner {
+/*		background:@white;*/
+	}
+}
 // Brand, links, text, and buttons
 .navbar {
   color: @navbarText;
@@ -208,16 +216,37 @@
   text-shadow: 0 -1px 0 rgba(0,0,0,.25);
 }
 // Buttons
+
+.navbar-inner {
+  padding-right:2px;
+  padding-left:2px;
+  
+  .btn {
+	  background: transparent;
+	  border-color: transparent;
+	  color: @white;
+	  text-shadow: none !important;
+	  
+  }
+  
+  .btn:hover {
+	  color: @white;
+	  text-shadow: none !important;
+	  border: 1px solid #063b55!important;
+	  -webkit-transition:(border-color 0.2s ease-in);
+  }
+}
+
 .navbar .btn {
   display: inline-block;
   padding: 4px 10px 4px;
   // Vertically center the button given @navbarHeight
-  @elementHeight: 28px;
+  @elementHeight: 27px;
   margin: ((@navbarHeight - @elementHeight) / 2 - 1) 5px ((@navbarHeight - @elementHeight) / 2);
   line-height: @baseLineHeight;
 }
 .navbar .btn-group {
-  margin: 0;
+  margin: 0px;
   // Vertically center the button given @navbarHeight
   @elementHeight: 28px;
   padding: ((@navbarHeight - @elementHeight) / 2 - 1) 5px ((@navbarHeight - @elementHeight) / 2);
