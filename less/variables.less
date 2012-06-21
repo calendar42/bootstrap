@@ -14,6 +14,7 @@
 @grayDarker:            #222;
 @grayDark:              #333;
 @gray:                  #555;
+@grayMedium:            #777;
 @grayLight:             #999;
 @grayLighter:           #eee;
 @white:                 #fff;
@@ -21,7 +22,8 @@
 
 // Accent colors
 // -------------------------
-@blue:                  #049cdb;
+
+@blue:                  #1b6187;
 @blueDark:              #0064cd;
 @green:                 #46a546;
 @red:                   #9d261d;
@@ -69,8 +71,8 @@
 
 // Buttons
 // -------------------------
-@btnBackground:                     @white;
-@btnBackgroundHighlight:            darken(@white, 10%);
+@btnBackground:                     @grayLighter;
+@btnBackgroundHighlight:            darken(@grayLighter, 10%);
 @btnBorder:                         #ccc;
 
 @btnPrimaryBackground:              @linkColor;
@@ -145,8 +147,8 @@
 
 // Navbar
 // -------------------------
-@navbarHeight:                    40px;
-@navbarBackground:                @grayDarker;
+@navbarHeight:                    44px;
+@navbarBackground:                @grayLighter;
 @navbarBackgroundHighlight:       @grayDark;
 
 @navbarText:                      @grayLight;
@@ -204,3 +206,10 @@
 // -------------------------
 @fluidGridColumnWidth:    6.382978723%;
 @fluidGridGutterWidth:    2.127659574%;
+
+
+// SIDEPANEL
+// --------------------------------------------------
+
+@sidePanelWidth:					300px;
+@sidePanelContentWidth:		@sidePanelWidth - 30px;
