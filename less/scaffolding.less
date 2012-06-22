@@ -27,3 +27,13 @@ a:hover {
   color: @linkColorHover;
   text-decoration: underline;
 }
+
+a.disabled {
+	.opacity(50);
+	color: @gray !important;
+}
+
+a.disabled:hover{
+	background: transparent !important;
+	color: @gray !important;
+}
