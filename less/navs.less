@@ -18,7 +18,14 @@
 }
 .nav > li > a:hover {
   text-decoration: none;
-  background-color: @grayLighter;
+  background-color: @grayBorder;
+}
+
+li.recommendation-list-item {
+	a {
+/*		display: inline-block;*/
+		color: @grayLight;
+	}
 }
 
 // Redeclare pull classes because of specifity
@@ -65,11 +72,16 @@
 .nav-list > li > a {
 	padding: 5px 18px 1px;
 }
+
+.nav-list > li.recommendation-list-item > a.main-list-item {
+	padding: 8px 18px 5px;
+}
+
 .nav-list > .active > a,
 .nav-list > .active > a:hover {
-  color: @blueDark;
+/*  color: @blueDark;*/
 /*  text-shadow: 0 -1px 0 rgba(0,0,0,.2);*/
-  background-color: @grayLighter;
+  background-color: @grayBorder;
 /*  border-top: 1px solid @grayLight;
   border-bottom: 1px solid @grayLight;*/
 }
@@ -299,6 +311,7 @@
 
 .tabs-below > .nav-tabs {
   border-top: 1px solid #ddd;
+  background: @grayLighter;
 }
 .tabs-below > .nav-tabs > li {
   margin-top: -1px;
