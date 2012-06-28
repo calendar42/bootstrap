@@ -16,7 +16,8 @@
 @gray:                  #555;
 @grayMedium:            #777;
 @grayLight:             #999;
-@grayBorder:						#DFDEDE;
+@grayAccent:			#d1d1d1;
+@grayBorder:			#DFDEDE;
 @grayLighter:           #f5f5f5;
 @white:                 #fff;
 
@@ -168,6 +169,8 @@
 @navbarSearchPlaceholderColor:    #ccc;
 @navbarBrandColor:                @navbarLinkColor;
 
+@minWidthMainNav:				  540px;
+
 
 // Hero unit
 // -------------------------
@@ -211,9 +214,22 @@
 @fluidGridColumnWidth:    6.382978723%;
 @fluidGridGutterWidth:    2.127659574%;
 
+// Grid & Map
+// -----------------------------------------------------
+
+@calendarWeekHeightMapVisible:    50%;
+@calendarDayWidthMapVisible:      25%;
+
 
 // SIDEPANEL
 // --------------------------------------------------
 
 @sidePanelWidth:					300px;
 @sidePanelContentWidth:		@sidePanelWidth - 30px;
+
+// MAIN APPLICATION
+// --------------------------------------------------
+
+@minAppwidth:					@minWidthMainNav + @sidePanelWidth;
+
+
