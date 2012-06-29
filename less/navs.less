@@ -38,7 +38,8 @@ ul.nav .nav-header {
   text-transform: uppercase;
 }
 
-#recommendation-list-view > ul.nav .nav-header {
+#recommendation-list-view > ul.nav .nav-header,
+#notification-list-view > ul.nav .nav-header {
 	margin-bottom: 10px;
 }
 
@@ -55,7 +56,7 @@ ul.nav ul li.nav-header {
 
 // Space them out when they follow another list item (link)
 .nav li + .nav-header {
-  margin-top: 9px;
+/*  margin-top: 9px;*/
 }
 
 
@@ -113,6 +114,16 @@ ul.nav ul li.nav-header {
   .nav-divider();
 }
 
+.list-subscript{
+	font-size: 0.85em;
+	display: block;
+	margin-top: -2px;
+	.opacity(75);
+}
+
+.list-item-title {
+	display: block;
+}
 
 
 // TABS AND PILLS

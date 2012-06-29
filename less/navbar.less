@@ -15,19 +15,16 @@
 }
 
 // Gradient is applied to it's own element because overflow visible is not honored by IE when filter is present
-.navbar-inner {
+.navbar-inner,
+.folded .magicbox .navbar-inner {
   min-height: @navbarHeight;
   padding-left:  20px;
   padding-right: 20px;
   
  background-image: -webkit-gradient(linear,left bottom,left top,color-stop(0.12,#135272),color-stop(0.44,#155778),color-stop(0.89,#1C6389));
  background-image: -moz-linear-gradient(center bottom,#135272 12%,#155778 44%,#1C6389 89%);
-  
- /* background: @navbarBackground;
-   #gradient > .vertical(@navbarBackgroundHighlight, @navbarBackground);*/
-/*  .border-radius(4px);*/
-/*  .box-shadow(~"0 1px 3px rgba(0,0,0,.25), inset 0 -1px 0 rgba(0,0,0,.1)");*/
 }
+
 
 // Set width to auto for default container
 // We then reset it for fixed navbars in the #gridSystem mixin
