@@ -213,7 +213,7 @@ input[type="checkbox"]:focus {
 
 
 //General styling of checkboxes
-.checkbox input[type="checkbox"] {
+input[type="checkbox"] {
 	-webkit-appearance: none;
 	border: 1px solid @inputBorder;
 	.square(16px);
@@ -221,11 +221,16 @@ input[type="checkbox"]:focus {
 	margin-right: 5px;
 }
 
-.checkbox input[type="checkbox"]:checked:after {
+input[type="checkbox"]:checked:after {
 	content:"✓";
 	color: @gray;
 	font-size: 1.4em;
     line-height: 0.4;
+}
+
+// Border exception for our calendar list view
+#calendar-list-view input[type="checkbox"] {
+	border: 1px solid transparent;
 }
 
 
