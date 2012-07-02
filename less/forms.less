@@ -211,6 +211,24 @@ input[type="checkbox"]:focus {
 // CHECKBOXES & RADIOS
 // -------------------
 
+
+//General styling of checkboxes
+.checkbox input[type="checkbox"] {
+	-webkit-appearance: none;
+	border: 1px solid @inputBorder;
+	.square(16px);
+	margin-top: 0px;
+	margin-right: 5px;
+}
+
+.checkbox input[type="checkbox"]:checked:after {
+	content:"✓";
+	color: @gray;
+	font-size: 1.4em;
+    line-height: 0.4;
+}
+
+
 // Indent the labels to position radios/checkboxes as hanging
 .radio,
 .checkbox {
@@ -299,7 +317,7 @@ input[readonly],
 select[readonly],
 textarea[readonly] {
   cursor: not-allowed;
-  background-color: @inputDisabledBackground;
+  background-color: transparent;
   border-color: #ddd;
 }
 // Explicitly reset the colors here
@@ -433,7 +451,22 @@ select:focus:required:invalid {
   .add-on,
   .btn {
     margin-left: -1px;
-    .border-radius(0);
+    .border-radius(3px);
+  }
+  
+  .add-on.btn{
+	  height: 11px;
+	  min-width: 10px;
+	  padding: 1px 4px 5px 3px;
+	  .box-shadow(~"inset 1px 0 0 rgba(255,255,255,.125), inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05)");
+	  border-bottom-color: darken(@btnBorder, 10%);
+  }
+  
+  .add-on.btn.pull-right{
+	  margin-top: -24px;
+	  margin-right: 2px;
+	  position: relative;
+	  z-index: 2;
   }
   .active {
     background-color: lighten(@green, 30);
@@ -447,7 +480,8 @@ select:focus:required:invalid {
   }
   .add-on:first-child,
   .btn:first-child {
-    .border-radius(@inputBorderRadius);
+ /*   .border-radius(@inputBorderRadius);*/
+	.border-radius(3px);
   }
 }
 .input-append {
@@ -462,7 +496,8 @@ select:focus:required:invalid {
   }
   .add-on:last-child,
   .btn:last-child {
-    .border-radius(0 @inputBorderRadius @inputBorderRadius 0);
+/*    .border-radius(0 @inputBorderRadius @inputBorderRadius 0);*/
+	.border-radius(3px);
   }
 }
 // Remove all border-radius for inputs with both prepend and append
@@ -475,12 +510,14 @@ select:focus:required:invalid {
   .add-on:first-child,
   .btn:first-child {
     margin-right: -1px;
-    .border-radius(@inputBorderRadius 0 0 @inputBorderRadius);
+/*    .border-radius(@inputBorderRadius 0 0 @inputBorderRadius);*/
+	.border-radius(3px);
   }
   .add-on:last-child,
   .btn:last-child {
     margin-left: -1px;
-    .border-radius(0 @inputBorderRadius @inputBorderRadius 0);
+/*    .border-radius(0 @inputBorderRadius @inputBorderRadius 0);*/
+	.border-radius(3px);
   }
 }
 
