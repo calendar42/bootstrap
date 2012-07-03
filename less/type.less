@@ -43,7 +43,7 @@ h1 {
 }
 h2 {
   font-size: 24px;
-  line-height: @baseLineHeight * 2;
+  line-height: @baseLineHeight * 1.6;
   small {
     font-size: 18px;
   }
@@ -76,6 +76,11 @@ h6 {
   margin-bottom: 8px;
 }
 
+.bordered-header {
+	border-bottom: 1px solid @grayBorder;
+	padding-bottom: 10px;
+}
+
 // Page header
 .page-header {
   padding-bottom: @baseLineHeight - 1;
@@ -86,6 +91,13 @@ h6 {
   line-height: 1;
 }
 
+
+.well {
+	h1, h2, h3, h4,
+	h5, h6 {
+		color: @grayMedium;
+	}
+}
 
 
 // LISTS

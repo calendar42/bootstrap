@@ -21,6 +21,13 @@
   }
 }
 
+// Clear margins
+// ---------------
+
+.clear-margins {
+	margin: 0 !important;
+}
+
 // Webkit-style focus
 // ------------------
 .tab-focus() {
@@ -577,6 +584,12 @@
       float: left;
       margin-left: @gridGutterWidth;
     }
+	
+    .well{
+		[class*="span"] {
+	      margin-left: @gridGutterWidth - 8;
+	    }
+	}
 
     // Set the container width, and override it for fixed navbars in media queries
     .container,

@@ -18,3 +18,15 @@
     height: auto;
   }
 }
+
+.collapse-partial {
+	position: relative;
+	height: auto;
+	max-height: 160px;
+	overflow: hidden;
+	.transition(height .35s ease);
+	&.in{
+		max-height: none;
+	}
+}
+
