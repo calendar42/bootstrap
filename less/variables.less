@@ -27,8 +27,9 @@
 // -------------------------
 
 @blue:                  #1b6187;
-@blueDarkest:						#032d42;
-@blueDark:              #0064cd;
+@blueDarkest:			#1a2732; /*USED FOR BACKGROUND*/
+@blueDark:              #5f6870; /*USED FOR HEADER TEXT*/
+@blueGrayLight:			#bbbfc2; /*USED FOR BODY TEXT ON blueDarkest*/
 @blueBorder:						#A7C8D8;
 @blueLight:							#F4F9FB;
 @green:                 #46a546;
@@ -57,7 +58,7 @@
 @serifFontFamily:       Georgia, "Times New Roman", Times, serif;
 @monoFontFamily:        Menlo, Monaco, Consolas, "Courier New", monospace;
 
-@baseFontSize:          13px;
+@baseFontSize:          15px;
 @baseFontFamily:        @sansFontFamily;
 @baseLineHeight:        20px;
 @altFontFamily:         @serifFontFamily;
@@ -132,7 +133,8 @@
 @zindexTooltip:           1020;
 @zindexFixedNavbar:       1030;
 @zindexModalBackdrop:     1040;
-@zindexModal:             1050;
+@zindexModal:             1050;// NAVBAR (FIXED AND STATIC)
+// -------------------------
 
 
 // Sprite icons path
@@ -153,12 +155,12 @@
 
 // Navbar
 // -------------------------
-@navbarHeight:                    40px;
+@navbarHeight:                    52px;
 @navbarBackground:                @blue;
 @navbarBackgroundHighlight:       #1C6389;
 
 @navbarText:                      @grayLight;
-@navbarLinkColor:                 @white;
+@navbarLinkColor:                 @blueGrayLight;
 @navbarLinkColorHover:            @white;
 @navbarLinkColorActive:           @navbarLinkColorHover;
 @navbarLinkBackgroundHover:       transparent;

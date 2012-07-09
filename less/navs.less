@@ -18,7 +18,8 @@
 }
 .nav > li > a:hover {
   text-decoration: none;
-  background-color: @grayBorder;
+  /*background-color: @grayBorder;*/
+  color: @white;
 }
 
 // Redeclare pull classes because of specifity
@@ -31,11 +32,11 @@
 ul.nav .nav-header {
   display: block;
   padding: 3px 9px;
-  font-weight: bold;
-	font-size: 0.87em;
+  font-weight: normal;
+	font-size: 1.5em;
   line-height: @baseLineHeight;
-  color: @grayMedium;
-  text-transform: uppercase;
+  color: @blueDark;
+  text-transform: lowercase;
 }
 
 #recommendation-list-view > ul.nav .nav-header,
@@ -46,12 +47,7 @@ ul.nav .nav-header {
 ul.nav ul li.nav-header {
   font-weight: normal;
   line-height: @baseLineHeight;
-  color: @grayLight;
-  text-transform: none;
-/*	border-top: 2px solid @grayBorder;*/
-	border-bottom: 1px solid @grayBorder;
-	margin-bottom: 0px !important;
-	background: #e9e9e9;
+  text-transform: lowercase;	
 }
 
 // Space them out when they follow another list item (link)
@@ -80,7 +76,7 @@ ul.nav ul li.nav-header {
 .nav-list .nav-header {
   margin-left:  -9px;
   margin-right: -9px;
-  text-shadow: 0 1px 0 rgba(255,255,255,.5);
+/*  text-shadow: 0 1px 0 rgba(255,255,255,.5);*/
 }
 
 
