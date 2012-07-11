@@ -106,6 +106,10 @@
   outline: 0;
 }
 
+ .btn-group.open > *{
+      .opacity(100) !important;
+    }
+
 
 
 // Split button dropdowns
@@ -216,4 +220,25 @@ border: 1px solid @inputBorder;
     .opacity(75);
   }
 }
+
+// TOGGLE STYLING
+.btn-group.toggle{
+  a:first-child{
+    border-left: 1px solid @blueBorder;
+  }
+  a:last-child{
+    border-right: 1px solid @blueBorder;
+  }
+}
+
+.navbar .btn-group.extra-spacing {
+    margin-left: 16px;
+    margin-right: 12px;
+}
+
+.btn-group.extra-height {
+  margin-top: 15px;
+}
+
+
 

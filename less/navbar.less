@@ -21,19 +21,18 @@
   padding-left:  20px;
   padding-right: 20px;
   
-  background-image: linear-gradient(bottom, rgb(26,39,50) 47%, rgb(26,39,50) 74%, rgb(24,35,46) 79%);
-  background-image: -o-linear-gradient(bottom, rgb(26,39,50) 47%, rgb(26,39,50) 74%, rgb(24,35,46) 79%);
-  background-image: -moz-linear-gradient(bottom, rgb(26,39,50) 47%, rgb(26,39,50) 74%, rgb(24,35,46) 79%);
-  background-image: -webkit-linear-gradient(bottom, rgb(26,39,50) 47%, rgb(26,39,50) 74%, rgb(24,35,46) 79%);
-  background-image: -ms-linear-gradient(bottom, rgb(26,39,50) 47%, rgb(26,39,50) 74%, rgb(24,35,46) 79%);
+  background-image: linear-gradient(bottom, rgb(26,39,50) 48%, rgb(24,35,46) 82%);
+  background-image: -o-linear-gradient(bottom, rgb(26,39,50) 48%, rgb(24,35,46) 82%);
+  background-image: -moz-linear-gradient(bottom, rgb(26,39,50) 48%, rgb(24,35,46) 82%);
+  background-image: -webkit-linear-gradient(bottom, rgb(26,39,50) 48%, rgb(24,35,46) 82%);
+  background-image: -ms-linear-gradient(bottom, rgb(26,39,50) 48%, rgb(24,35,46) 82%);
 
   background-image: -webkit-gradient(
-  	linear,
-  	left bottom,
-  	left top,
-  	color-stop(0.47, rgb(26,39,50)),
-  	color-stop(0.74, rgb(26,39,50)),
-  	color-stop(0.79, rgb(24,35,46))
+    linear,
+    left bottom,
+    left top,
+    color-stop(0.48, rgb(26,39,50)),
+    color-stop(0.82, rgb(24,35,46))
   );
 }
 
@@ -232,8 +231,9 @@
   @elementHeight: 20px;
   padding: ((@navbarHeight - @elementHeight) / 2 - 1) 10px ((@navbarHeight - @elementHeight) / 2 + 1);
   line-height: 19px;
-  color: @navbarLinkColor;
+  color: @white;
   text-decoration: none;
+  .opacity(50);
 /*  text-shadow: 0 -1px 0 rgba(0,0,0,.25);*/
 }
 // Buttons
@@ -247,11 +247,13 @@
 	  border-color: transparent;
 	  color: @white;
 	  text-shadow: none !important;
-    .opacity(70);
+    box-shadow: none !important;
+    .opacity(50);
 	  
   }
   
-  .btn:hover {
+  .btn:hover,
+  .btn.active {
 	  .opacity(100);
 	  text-shadow: none !important;
 	  border-color: transparent;
@@ -265,28 +267,41 @@
   padding: 4px 10px 4px;
   // Vertically center the button given @navbarHeight
   @elementHeight: 27px;
-  margin: ((@navbarHeight - @elementHeight) / 2 - 1.5 ) 5px ((@navbarHeight - @elementHeight) / 2 - 1.5);
+  margin: ((@navbarHeight - @elementHeight) / 2 - 1.5 ) 9px ((@navbarHeight - @elementHeight) / 2 - 1.5);
   line-height: @baseLineHeight;
 }
+
+
 .navbar .btn-group {
   margin: 0px;
   // Vertically center the button given @navbarHeight
   @elementHeight: 28px;
-  padding: ((@navbarHeight - @elementHeight) / 2 - 1) 5px ((@navbarHeight - @elementHeight) / 2);
+  padding: ((@navbarHeight - @elementHeight) / 2 - 1.5) 9px ((@navbarHeight - @elementHeight) / 2 - 1.5);
+
+  a.dropdown-toggle {
+        .opacity(50);
+        &:hover{
+        .opacity(100);
+        -webkit-transition:(opacity 0.1s ease-in);
+      }
+    }
+}
+
+.btn-group.spaced .btn:first-child{
+  margin-right: 20px;
+
 }
 // Hover
 .navbar .nav > li > a:hover {
-  background-color: @navbarLinkBackgroundHover; // "transparent" is default to differentiate :hover from .active
-  color: @navbarLinkColorHover;
+  .opacity(100);
   text-decoration: none;
 }
 
 // Active nav items
 .navbar .nav .active > a,
 .navbar .nav .active > a:hover {
-  color: @navbarLinkColorActive;
+  .opacity(100);
   text-decoration: none;
-  background-color: @navbarLinkBackgroundActive;
 }
 
 // Dividers (basically a vertical hr)
