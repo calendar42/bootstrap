@@ -26,13 +26,17 @@
   .ie7-restore-left-whitespace(); // Give IE7 some love
 }
 
-.btn.transparent {
+.btn.transparent,
+.btn-group > .btn.dropdown-toggle.transparent {
   color: @white;
   background: transparent;
   .opacity(50) !important;
   .box-shadow(none);
   text-shadow:none;
   border: 1px solid transparent;
+  .caret{
+    border-top-color: @white;
+  }
   &:hover, &:active{
     .opacity(100) !important;
     color: @white;

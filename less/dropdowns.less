@@ -21,6 +21,8 @@
   outline: 0;
 }
 
+
+
 // Dropdown arrow/caret
 // --------------------
 .caret {
@@ -73,18 +75,21 @@
   float: left;
   min-width: 160px;
   padding: 4px 0;
-  margin: 1px 0 0; // override default ul
+  margin: 1px 0 0 !important; // override default ul
   list-style: none;
   background-color: @dropdownBackground;
-  border: 1px solid #ccc;
   border: 1px solid rgba(0,0,0,.2);
   *border-right-width: 2px;
   *border-bottom-width: 2px;
-  .border-radius(3px);
+  .border-radius(5px);
   .box-shadow(0 5px 10px rgba(0,0,0,.2));
   -webkit-background-clip: padding-box;
      -moz-background-clip: padding;
           background-clip: padding-box;
+
+  li {
+    border-bottom: 1px solid transparent !important;
+  }
 
   // Aligns the dropdown menu to right
   &.pull-right {
