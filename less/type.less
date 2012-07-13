@@ -23,7 +23,7 @@ p {
 // HEADINGS
 // --------
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6, h7 {
   margin: 0;
   font-family: @headingsFontFamily;
   font-weight: @headingsFontWeight;
@@ -56,26 +56,36 @@ h3 {
     font-size: 14px;
   }
 }
-h4, h5, h6 {
+h4, h5, h6, h7 {
   line-height: @baseLineHeight;
 }
 h4 {
-  font-size: 14px;
+  font-size: 20px;
+  color: @grayLight;
+  text-transform: lowercase;
+  margin-bottom: 8px;
+  font-weight: normal;
+  margin-left: 2px;
   small {
     font-size: 12px;
   }
   margin-bottom: 5px;
 }
 h5 {
-  font-size: 13px;
-}
-h6 {
-  font-size: 20px;
+  font-size: 15px;
   color: @grayLight;
   text-transform: none;
-  margin-bottom: 8px;
+  margin-bottom: 5px;
   font-weight: normal;
-  margin-left: 2px;
+  margin-left: 0px;
+}
+h6 {
+  // font-size: 20px;
+  // color: @grayLight;
+  // text-transform: none;
+  // margin-bottom: 8px;
+  // font-weight: normal;
+  // margin-left: 2px;
 }
 
 .bordered-header {
@@ -246,4 +256,10 @@ small {
 }
 cite {
   font-style: normal;
+}
+
+.subscript {
+  .opacity(50);
+  font-size: 13px;
+  font-style: italic;
 }
