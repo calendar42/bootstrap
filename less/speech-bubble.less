@@ -1,0 +1,42 @@
+// SPEECH BUBBLE
+// --------------------------------
+
+.bubble {
+  position: relative;
+  width: 80%;
+  padding: 10px;
+  z-index: @zindexPopover;
+  &.top    { margin-top:   5px; }
+  &.right  { margin-right: 5px; }
+  &.bottom { margin-top:   0px; }
+  &.left   { margin-left:  5px; }
+  &.top .arrow    { #speechBubble > .top(); }
+  &.right .arrow  { #speechBubble > .right(); }
+  &.bottom .arrow { #speechBubble > .bottom(); }
+  &.left .arrow   { #speechBubble > .left();  }
+  
+  // Use the .own and .other classes to create a dialogue 
+  &.own    { 
+    background: @ownColor; 
+    float: right;
+      .bubble-content{
+        color: @white;
+      }
+  }
+  
+  &.other  { 
+    background: @otherColor; 
+    float: left;
+      .bubble-content{
+        color: @white;
+      }
+  }
+
+  // Adds the arrow
+  .arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+  }
+
+}
