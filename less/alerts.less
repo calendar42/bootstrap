@@ -43,6 +43,21 @@
   color: @infoText;
 }
 
+.alert-transparent {
+  background-color: transparent;
+  border: 1px solid @blueDark;
+  color: @blueGrayLight;
+  text-align: center;
+  text-shadow: none;
+  .border-radius(0);
+  margin: 0 auto 20px;
+}
+
+.alert-transparent.invert {
+  border-color: @inputBorder;
+  color: @grayLight;
+}
+
 // Block alerts
 // ------------------------
 .alert-block {
