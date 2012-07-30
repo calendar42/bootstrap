@@ -120,10 +120,13 @@
 .btn.disabled,
 .btn[disabled] {
   cursor: default;
-  background-color: darken(@white, 10%);
+  background-color: transparent;
   background-image: none;
-  .opacity(65);
+  .opacity(30);
   .box-shadow(none);
+  &:hover, &:hover .caret{
+    .opacity(30);
+  }
 }
 
 
