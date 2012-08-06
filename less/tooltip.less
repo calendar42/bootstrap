@@ -18,6 +18,13 @@
   &.left .tooltip-arrow   { #popoverArrow > .left(); }
   &.bottom .tooltip-arrow { #popoverArrow > .bottom(); }
   &.right .tooltip-arrow  { #popoverArrow > .right(); }
+
+  // overwright arrow positioning when tooltip sticks to the left side of the viewport
+  &.top.pull-arrow-left .tooltip-arrow,
+  &.bottom.pull-arrow-left .tooltip-arrow { 
+    left: 20px !important;
+  }
+
 }
 .tooltip-inner {
   max-width: 200px;
