@@ -128,8 +128,8 @@ input[type="color"],
   border-top: none;
   border-left: none;
   border-right: none;
-  @transition: border linear .2s, box-shadow linear .2s;
-  .transition(@transition);
+  // @transition: border linear .2s, box-shadow linear .2s;
+  // .transition(@transition);
 
   // Focus state
   &:focus {
@@ -336,6 +336,7 @@ textarea[readonly] {
   cursor: not-allowed;
   background-color: transparent;
   border-color: #ddd;
+  border-bottom-style: dashed !important;
   .opacity(40);
 }
 // Explicitly reset the colors here
