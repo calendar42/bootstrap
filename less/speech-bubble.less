@@ -17,10 +17,11 @@
   
   // Use the .own and .other classes to create a dialogue 
   &.own    { 
-    background: @ownColor; 
+    background: @ownColor;   
+    border: 1px solid @otherColor;  
     float: right;
       .bubble-content{
-        color: @white;
+        color: @otherColor;
       }
   }
   

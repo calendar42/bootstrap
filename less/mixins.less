@@ -529,12 +529,12 @@
 
 #speechBubble {
 
-  .bottom(@arrowWidth: 5px, @color: @ownColor) {
-    bottom: -5px;
+  .bottom(@arrowWidth: 10px, @color: @otherColor) {
+    bottom: -10px;
     right: 8px;
     margin-left: -@arrowWidth;
     border-left: @arrowWidth solid transparent;
-    border-right: @arrowWidth solid transparent;
+    // border-right: @arrowWidth solid transparent;
     border-top: @arrowWidth solid @color;
   }
   .right(@arrowWidth: 5px, @color: @ownColor) {
@@ -545,11 +545,10 @@
     border-bottom: @arrowWidth solid transparent;
     border-left: @arrowWidth solid @color;
   }
-  .top(@arrowWidth: 5px, @color: @otherColor) {
-    top: -5px;
-    left: 12px;
+  .top(@arrowWidth: 10px, @color: @otherColor) {
+    top: -10px;
+    left: 20px;
     margin-left: -@arrowWidth;
-    border-left: @arrowWidth solid transparent;
     border-right: @arrowWidth solid transparent;
     border-bottom: @arrowWidth solid @color;
   }
