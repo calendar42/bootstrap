@@ -130,9 +130,19 @@
          var placementStr = inside ? placement.split(' ')[1] : placement;
          if (placementStr === 'top' || placementStr === 'bottom') {
             if (pos.left <= 0  && actualWidth > pos.width ) {
-              posLeft = 3;
-              // find #popoverArrow.top and addClass pull-arrow-left
-              $tip.addClass('pull-arrow-left');
+
+                if( this.$element.parents('.btn-group').length > 0){
+
+                  posLeft = pos.left + pos.width / 2 - actualWidth / 2;
+
+                }else{
+                  
+                  posLeft = 3;
+                  // find #popoverArrow.top and addClass pull-arrow-left
+                  $tip.addClass('pull-arrow-left');
+                }
+
+              
             } else {
               posLeft = pos.left + pos.width / 2 - actualWidth / 2;
             }
