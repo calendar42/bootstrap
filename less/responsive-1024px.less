@@ -1,0 +1,30 @@
+// PORTRAIT TABLET TO DEFAULT DESKTOP
+// ----------------------------------
+
+@media (max-width: 1024px) {
+
+  // Fixed grid
+  #grid > .core(42px, 20px);
+
+  // Fluid grid
+  #grid > .fluid(5.801104972%, 2.762430939%);
+
+  // Input grid
+  #grid > .input(42px, 20px);
+
+  // No need to reset .thumbnails here since it's the same @gridGutterWidth
+
+  #main-nav .navbar .navbar-inner {
+
+    a.btn {
+        font-size: 14px !important;
+        padding-left: 6px !important;
+        padding-right: 6px !important;
+    }
+
+    .btn-group.extra-spacing{
+        margin-left:8px;
+        margin-right:8px;
+    }
+  }
+}
