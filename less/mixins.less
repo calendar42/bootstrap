@@ -483,10 +483,10 @@
   margin-top: (@navbarHeight - @elementHeight) / 2;
 }
 
-// Popover arrows
+// Tooltip arrows
 // -------------------------
-// For tipsies and popovers
-#popoverArrow {
+// For tipsies
+#toolTip {
 
   .top(@arrowWidth: 10px, @color: @white) {
     bottom: -5px;
@@ -522,6 +522,48 @@
     border-right: @arrowWidth solid @color;
   }
 }
+
+// Popover arrows
+// -------------------------
+// For tipsies and popovers
+#popoverArrow {
+
+  .top(@arrowWidth: 10px, @color: #747d84) {
+    bottom: -5px;
+    left: 50%;
+    margin-left: -@arrowWidth;
+    border-left: @arrowWidth solid transparent;
+    border-right: @arrowWidth solid transparent;
+    border-top: @arrowWidth solid @color;
+  }
+
+  .left(@arrowWidth: 10px, @color: #747d84) {
+    top: 50%;
+    right: -5px;
+    margin-top: -@arrowWidth;
+    border-top: @arrowWidth solid transparent;
+    border-bottom: @arrowWidth solid transparent;
+    border-left: @arrowWidth solid @color;
+  }
+  .bottom(@arrowWidth: 10px, @color: #747d84) {
+    top: -5px;
+    left: 50%;
+    margin-left: -@arrowWidth;
+    border-left: @arrowWidth solid transparent;
+    border-right: @arrowWidth solid transparent;
+    border-bottom: @arrowWidth solid @color;
+  }
+  .right(@arrowWidth: 10px, @color: #747d84) {
+    top: 50%;
+    left: -5px;
+    margin-top: -@arrowWidth;
+    border-top: @arrowWidth solid transparent;
+    border-bottom: @arrowWidth solid transparent;
+    border-right: @arrowWidth solid @color;
+  }
+}
+
+
 
 // Speech bubble arrows
 // -------------------------
