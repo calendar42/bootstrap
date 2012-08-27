@@ -1,7 +1,7 @@
 // PORTRAIT TABLET TO DEFAULT DESKTOP
 // ----------------------------------
 
-@media (max-width: 1024px) {
+@media (max-width: 1080px) {
 
   // Fixed grid
   #grid > .core(42px, 20px);
@@ -16,15 +16,24 @@
 
   #main-nav .navbar .navbar-inner {
 
-    a.btn {
+    a.btn,
+    .txt {
         font-size: 14px !important;
         padding-left: 6px !important;
         padding-right: 6px !important;
+    }
+
+    .txt {
+      margin-left: 10px;
     }
 
     .btn-group.extra-spacing{
         margin-left:8px;
         margin-right:8px;
     }
+  }
+
+  #connection-control a.dropdown-toggle{
+    font-size: 14px !important;
   }
 }
