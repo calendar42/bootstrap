@@ -14,7 +14,7 @@
   font-size: @baseFontSize;
   line-height: @baseLineHeight;
   // *line-height: 20px;
-  color: @grayMedium;
+  color: #444;
   text-align: center;
   vertical-align: middle;
   cursor: pointer;
@@ -63,28 +63,6 @@
   }
 }
 
-
-
-.navbar-inner .btn-group > a.btn.dropdown-toggle {
-	border-radius: none !important;
-	-webkit-border-radius: none !important;
-	border: none !important;
-}
-
-#connection-control {
-	.btn.dropdown-toggle {
-		background: transparent !important;
-		color: @white !important;
-		border-color:transparent !important;
-		border-radius: none !important;
-		-webkit-border-radius: none !important;
-		text-shadow: none !important;
-    box-shadow: none !important;
-    -webkit-box-shadow: none !important;
-	}
-}
-
-
 // Hover state
 .btn:hover {
   color: @grayDark;
@@ -109,7 +87,6 @@
 .btn:active {
   background-color: darken(@white, 10%);
   background-color: darken(@white, 15%) e("\9");
-  border-color: darken(@btnBorder, 10%);
   
   background-image: none;
   outline: 0;
