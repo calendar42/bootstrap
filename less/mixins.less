@@ -226,6 +226,14 @@
           transition: @transition;
 }
 
+.transition-delay(@delay){
+  -webkit-transition-delay: @delay; /* Safari and Chrome */
+     -moz-transition-delay: @delay; /* Firefox 4 */
+      -ms-transition-delay: @delay; /* Firefox 4 */
+       -o-transition-delay: @delay; /* Opera */
+          transition-delay: @delay;
+}
+
 // Transformations
 .rotate(@degrees) {
   -webkit-transform: rotate(@degrees);
