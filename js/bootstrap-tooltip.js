@@ -1,5 +1,5 @@
 /* ===========================================================
- * bootstrap-tooltip.js v2.2.1
+ * bootstrap-tooltip.js v2.0.4
  * http://twitter.github.com/bootstrap/javascript.html#tooltips
  * Inspired by the original jQuery.tipsy by Jason Frame
  * ===========================================================
@@ -119,21 +119,39 @@
         inside = /in/.test(placement)
 
         $tip
-          .detach()
+          .remove()
           .css({ top: 0, left: 0, display: 'block' })
-          .insertAfter(this.$element)
+          .appendTo(inside ? this.$element : document.body)
 
         pos = this.getPosition(inside)
         
         actualWidth = $tip[0].offsetWidth
         actualHeight = $tip[0].offsetHeight
         
-        switch (inside ? placement.split(' ')[1] : placement) {
+
+         var posLeft;
+         var placementStr = inside ? placement.split(' ')[1] : placement;
+         if (placementStr === 'top' || placementStr === 'bottom') {
+              
+              if ( (actualWidth/2) >= (pos.left + (pos.width/2)) ) {
+                  
+                  posLeft = 3;
+                  // find #popoverArrow.top and addClass pull-arrow-left
+                  $tip.addClass('pull-arrow-left');
+              
+            } else {
+              posLeft = pos.left + pos.width / 2 - actualWidth / 2;
+            }
+         }
+
+        switch (placementStr) {
           case 'bottom':
-            tp = {top: pos.top + pos.height, left: pos.left + pos.width / 2 - actualWidth / 2}
+            // tp = {top: pos.top + pos.height, left: pos.left + pos.width / 2 - actualWidth / 2}
+            tp = {top: pos.top + pos.height, left: posLeft}
             break
           case 'top':
-            tp = {top: pos.top - actualHeight, left: pos.left + pos.width / 2 - actualWidth / 2}
+            // tp = {top: pos.top - actualHeight, left: pos.left + pos.width / 2 - actualWidth / 2}
+            tp = {top: pos.top - actualHeight, left: posLeft}
             break
           case 'left':
             tp = {top: pos.top + pos.height / 2 - actualHeight / 2, left: pos.left - actualWidth}
@@ -144,7 +162,7 @@
         }
 
         $tip
-          .offset(tp)
+          .css(tp)
           .addClass(placement)
           .addClass('in')
       }
@@ -166,18 +184,18 @@
 
       function removeWithAnimation() {
         var timeout = setTimeout(function () {
-          $tip.off($.support.transition.end).detach()
+          $tip.off($.support.transition.end).remove()
         }, 500)
 
         $tip.one($.support.transition.end, function () {
           clearTimeout(timeout)
-          $tip.detach()
+          $tip.remove()
         })
       }
 
       $.support.transition && this.$tip.hasClass('fade') ?
         removeWithAnimation() :
-        $tip.detach()
+        $tip.remove()
 
       return this
     }
@@ -235,9 +253,8 @@
       this.enabled = !this.enabled
     }
 
-  , toggle: function (e) {
-      var self = $(e.currentTarget)[this.type](this._options).data(this.type)
-      self[self.tip().hasClass('in') ? 'hide' : 'show']()
+  , toggle: function () {
+      this[this.tip().hasClass('in') ? 'hide' : 'show']()
     }
 
   , destroy: function () {
@@ -270,7 +287,7 @@
   , trigger: 'hover'
   , title: ''
   , delay: 0
-  , html: false
+  , html: true
   }
 
 }(window.jQuery);
