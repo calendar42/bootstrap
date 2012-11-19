@@ -128,6 +128,18 @@ input[type="color"],
   border-top: none;
   border-left: none;
   border-right: none;
+
+  &.onhover-showedit {
+    border: 1px solid transparent;
+    @transition: border linear .1s;
+    .transition(@transition);
+    &:hover {
+      border: 1px solid hsla(0,0%,0%, 0.3) !important;
+    }
+    &:focus{
+      border: 1px solid hsla(0,0%,0%, 0.5) !important; 
+    }
+  }
   // @transition: border linear .2s, box-shadow linear .2s;
   // .transition(@transition);
 
@@ -224,7 +236,7 @@ input[type="checkbox"]:focus {
 input[type="checkbox"] {
 	-webkit-appearance: none;
 	border: 1px solid @inputBorder;
-	.square(15px);
+	.square(17px);
 	margin-top: 0px;
 	margin-right: 5px;
   &:checked{

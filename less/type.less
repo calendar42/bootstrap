@@ -61,16 +61,15 @@ h4, h5, h6, h7 {
   line-height: @baseLineHeight;
 }
 h4 {
-  font-size: 20px;
-  color: @grayLight;
+  font-size: 15px;
+  color: #afafaf;
   text-transform: lowercase;
-  margin-bottom: 8px;
+  margin-bottom: 2px;
   font-weight: normal;
-  margin-left: 0px;
+  margin-left: 3px;
   small {
     font-size: 12px;
   }
-  margin-bottom: 5px;
 }
 h5 {
   font-size: 15px;
@@ -180,6 +179,15 @@ hr {
   border: 0;
   border-top: 1px solid @hrBorder;
   border-bottom: 1px solid @white;
+}
+
+form {
+  hr {
+    margin: 12px 0 14px;
+    border: 0;
+    border-top: 1px solid @hrBorder;
+    border-bottom: none;
+  }  
 }
 
 // Emphasis
