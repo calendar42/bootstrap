@@ -86,7 +86,9 @@
 
 // Active state
 .btn.active,
-.btn:active {
+.btn:active,
+.btn.active.btn-c42,
+.btn.btn-c42:active{
   background-color: darken(@white, 10%);
   background-color: darken(@white, 15%) e("\9");
   
@@ -235,15 +237,18 @@ input[type="button"] {
   .buttonBackground(@btnInverseBackground, @btnInverseBackgroundHighlight);
 }
 
-.btn-c42 {
+.btn-c42,
+.btn-c42.btn.dropdown-toggle{
   background: transparent;
-  border-color: #d6d2ce;
+  border: 1px solid #d0ccc7;
   color: #707070;
   @transition: all linear .1s;
   .transition(@transition);
+  .box-shadow(none);
   &:hover, &.active{
     .buttonBackground(#efedea, #e2e2e0);
-    border-color: #c4bfba;
+    .box-shadow(~"inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05)");
+    border-color: #c4bfba !important;
   }
 }
 
@@ -293,11 +298,24 @@ input[type="submit"].btn {
   cursor: pointer;
   color: @linkColor;
   .border-radius(0);
+  &.active,
+  &.active:hover{
+    background-color: darken(@white, 10%);
+    background-color: darken(@white, 15%) e("\9");
+    border-color: darken(#d0ccc7, 10%);
+    background-image: none;
+    outline: 0;
+    .box-shadow(~"inset 0 2px 4px rgba(0,0,0,.15), 0 1px 2px rgba(0,0,0,.05)");
+  }
 }
 .btn-link:hover {
   color: @linkColorHover;
   text-decoration: underline;
   background-color: transparent;
+  .box-shadow(none);
+  i {
+    text-decoration: none;
+  }
 }
 .btn-link[disabled]:hover {
   color: @grayDark;
