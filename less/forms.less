@@ -240,6 +240,8 @@ input[type="checkbox"] {
 	.square(17px);
 	margin-top: 0px;
 	margin-right: 5px;
+  .border-radius(3px);
+  position: relative;
   &:checked{
     background: transparent !important;
     background-image: none;
@@ -247,10 +249,15 @@ input[type="checkbox"] {
 }
 
 input[type="checkbox"]:checked:after {
-	content:"✓";
-	color: @gray;
-	font-size: 1.4em;
-    line-height: 0.4;
+     position: absolute; 
+     content: ''; 
+     left: 15%; 
+     top: -10%; 
+     height: 40%; 
+     width: 90%; 
+     border-bottom: 3px solid @gray; 
+     border-left: 3px solid @gray; 
+     -webkit-transform: rotate(-45deg);
 }
 
 // Indent the labels to position radios/checkboxes as hanging
