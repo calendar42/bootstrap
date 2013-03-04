@@ -91,6 +91,16 @@
     left: auto;
   }
 
+  &.dropdown-menu-wrapped {
+    a,
+    label {
+      white-space: normal;
+      padding: 6px 15px;
+      border-bottom: 1px solid #dfdede;
+      width: 220px;
+    }
+  }
+
   // Dividers (basically an hr) within the dropdown
   .divider {
     .nav-divider(@dropdownDividerTop, @dropdownDividerBottom);
