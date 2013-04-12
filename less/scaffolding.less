@@ -1,10 +1,10 @@
+//
 // Scaffolding
-// Basic and global styles for generating a grid system, structural layout, and page templates
-// -------------------------------------------------------------------------------------------
+// --------------------------------------------------
 
 
 // Body reset
-// ----------
+// -------------------------
 
 body {
   margin: 0;
@@ -17,26 +17,18 @@ body {
 
 
 // Links
-// -----
+// -------------------------
 
 a {
   color: @linkColor;
   text-decoration: none;
 }
-a:hover {
+a:hover,
+a:focus {
   color: @linkColorHover;
   text-decoration: underline;
 }
 
-a.disabled {
-	.opacity(50);
-	color: @gray !important;
-}
-
-a.disabled:hover{
-	background: transparent !important;
-	color: @gray !important;
-}
 
 // Images
 // -------------------------

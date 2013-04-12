@@ -1,78 +1,66 @@
 // BUTTON STYLES
 // -------------
-
+// color: @grayDark;
 
 // Base styles
 // --------------------------------------------------
+
 
 // Core
 .btn {
   display: inline-block;
   .ie7-inline-block();
-  padding: 4px 10px 4px;
+  padding: 4px 12px;
   margin-bottom: 0; // For input.btn
   font-size: @baseFontSize;
   line-height: @baseLineHeight;
-  // *line-height: 20px;
-  color: @grayDark;
   text-align: center;
   vertical-align: middle;
   cursor: pointer;
-  .buttonBackground(@btnBackground, @btnBackgroundHighlight);
+  .buttonBackground(@btnBackground, @btnBackgroundHighlight, @grayDark, 0 1px 1px rgba(255,255,255,.75));
   border: 1px solid @btnBorder;
   *border: 0; // Remove the border to prevent IE7's black border on input:focus
   border-bottom-color: darken(@btnBorder, 10%);
-  .border-radius(3px);
+  .border-radius(@borderRadiusSmall);
   .ie7-restore-left-whitespace(); // Give IE7 some love
-  text-shadow: 0 1px 1px rgba(255,255,255,.75);
   .box-shadow(~"inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05)");
-}
 
-// Hover state
-.btn:hover {
-  color: @grayDark;
-  text-decoration: none;
-  background-color: darken(@white, 10%);
-  *background-color: darken(@white, 10%); /* Buttons in IE7 don't get borders, so darken on hover */
-  background-position: 0 -15px;
+  // Hover/focus state
+  &:hover,
+  &:focus {
+    color: @grayDark;
+    text-decoration: none;
+    background-position: 0 -15px;
 
-  // transition is only when going to hover, otherwise the background
-  // behind the gradient (there for IE<=9 fallback) gets mismatched
-  .transition(background-position .1s linear);
-    .box-shadow(~"inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05)");
-}
-
-// Focus state for keyboard and accessibility
-.btn:focus {
-  .tab-focus();
-}
-
-// Active state
-.btn.active,
-.btn:active,
-.btn.active.btn-c42,
-.btn.btn-c42:active{
-  background-color: darken(@white, 10%);
-  background-color: darken(@white, 15%) e("\9");
-  
-  background-image: none;
-  outline: 0;
-  .box-shadow(~"inset 0 2px 4px rgba(0,0,0,.15), 0 1px 2px rgba(0,0,0,.05)");
-}
-
-// Disabled state
-.btn.disabled,
-.btn[disabled] {
-  color: @white;
-  cursor: default;
-  background-color: transparent;
-  background-image: none;
-  .opacity(30);
-  .box-shadow(none);
-  &:hover, &:hover .caret{
-    .opacity(30);
+    // transition is only when going to hover/focus, otherwise the background
+    // behind the gradient (there for IE<=9 fallback) gets mismatched
+    .transition(background-position .1s linear);
   }
+
+  // Focus state for keyboard and accessibility
+  &:focus {
+    .tab-focus();
+  }
+
+  // Active state
+  &.active,
+  &:active {
+    background-image: none;
+    outline: 0;
+    .box-shadow(~"inset 0 2px 4px rgba(0,0,0,.15), 0 1px 2px rgba(0,0,0,.05)");
+  }
+
+  // Disabled state
+  &.disabled,
+  &[disabled] {
+    cursor: default;
+    background-image: none;
+    .opacity(45);
+    .box-shadow(none);
+  }
+
 }
+
 
 
 // Button Sizes
@@ -80,31 +68,37 @@
 
 // Large
 .btn-large {
-  padding: 9px 14px;
-  font-size: @baseFontSize + 2px;
-  line-height: normal;
-  .border-radius(3px);
+  padding: @paddingLarge;
+  font-size: @fontSizeLarge;
+  .border-radius(@borderRadiusLarge);
 }
-.btn-large [class^="icon-"] {
-  margin-top: 1px;
+.btn-large [class^="icon-"],
+.btn-large [class*=" icon-"] {
+  margin-top: 4px;
 }
 
 // Small
 .btn-small {
-  padding: 5px 9px;
-  font-size: @baseFontSize - 2px;
-  line-height: @baseLineHeight - 2px;
+  padding: @paddingSmall;
+  font-size: @fontSizeSmall;
+  .border-radius(@borderRadiusSmall);
 }
-.btn-small [class^="icon-"] {
+.btn-small [class^="icon-"],
+.btn-small [class*=" icon-"] {
+  margin-top: 0;
+}
+.btn-mini [class^="icon-"],
+.btn-mini [class*=" icon-"] {
   margin-top: -1px;
 }
 
 // Mini
 .btn-mini {
-  padding: 2px 6px;
-  font-size: @baseFontSize - 2px;
-  line-height: @baseLineHeight - 4px;
+  padding: @paddingMini;
+  font-size: @fontSizeMini;
+  .border-radius(@borderRadiusSmall);
 }
+
 
 // Block button
 // -------------------------
@@ -136,25 +130,6 @@ input[type="button"] {
 // Alternate buttons
 // --------------------------------------------------
 
-// Set text color
-// -------------------------
-.btn-primary,
-.btn-primary:hover,
-.btn-warning,
-.btn-warning:hover,
-.btn-danger,
-.btn-danger:hover,
-.btn-success,
-.btn-success:hover,
-.btn-info,
-.btn-info:hover,
-.btn-inverse,
-.btn-inverse:hover,
-.btn-primary-original,
-.btn-primary-original:hover {
-  color: @white !important;
-  text-shadow: 0 -1px 0 rgba(0,0,0,.25) !important;
-}
 // Provide *some* extra contrast for those who can get it
 .btn-primary.active,
 .btn-warning.active,
@@ -162,8 +137,9 @@ input[type="button"] {
 .btn-success.active,
 .btn-info.active,
 .btn-inverse.active {
-  color: rgba(255,255,255,.75) !important;
+  color: rgba(255,255,255,.75);
 }
+
 
 // Set the backgrounds
 // -------------------------
@@ -244,8 +220,9 @@ input[type="submit"].btn {
   }
 
   // IE7 has some default padding on button controls
-  *padding-top: 2px;
-  *padding-bottom: 2px;
+  *padding-top: 3px;
+  *padding-bottom: 3px;
+
   &.btn-large {
     *padding-top: 7px;
     *padding-bottom: 7px;
@@ -259,6 +236,7 @@ input[type="submit"].btn {
     *padding-bottom: 1px;
   }
 }
+
 
 // Link buttons
 // --------------------------------------------------
@@ -276,26 +254,15 @@ input[type="submit"].btn {
   cursor: pointer;
   color: @linkColor;
   .border-radius(0);
-  &.active,
-  &.active:hover{
-    background-color: darken(@white, 10%);
-    background-color: darken(@white, 15%) e("\9");
-    border-color: darken(#d0ccc7, 10%);
-    background-image: none;
-    outline: 0;
-    .box-shadow(~"inset 0 2px 4px rgba(0,0,0,.15), 0 1px 2px rgba(0,0,0,.05)");
-  }
 }
-.btn-link:hover {
+.btn-link:hover,
+.btn-link:focus {
   color: @linkColorHover;
   text-decoration: underline;
   background-color: transparent;
-  .box-shadow(none);
-  i {
-    text-decoration: none;
-  }
 }
-.btn-link[disabled]:hover {
+.btn-link[disabled]:hover,
+.btn-link[disabled]:focus {
   color: @grayDark;
   text-decoration: none;
 }
