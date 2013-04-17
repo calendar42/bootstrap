@@ -720,10 +720,11 @@ legend + .control-group {
   }
   // Float the labels left
   .control-label {
+    width: 140px;
     float: left;
     width: @horizontalComponentOffset - 20;
     padding-top: 5px;
-    text-align: right;
+    text-align: left;
   }
   // Move over all input controls and content
   .controls {
@@ -735,6 +736,10 @@ legend + .control-group {
     *margin-left: 0;
     &:first-child {
       *padding-left: @horizontalComponentOffset;
+    }
+
+    &.inline a.btn{
+      margin-left: 30px;
     }
   }
   // Remove bottom margin on block level help text since that's accounted for on .control-group
