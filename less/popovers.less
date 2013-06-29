@@ -72,7 +72,7 @@
 }
 
 .popover {
-  &.top .arrow {
+  &.top .arrow, &.top-left .arrow, &.top-right .arrow {
     left: 50%;
     margin-left: -@popoverArrowOuterWidth;
     border-bottom-width: 0;
@@ -100,7 +100,7 @@
       border-right-color: @popoverArrowColor;
     }
   }
-  &.bottom .arrow {
+  &.bottom .arrow, &.bottom-left .arrow, &.bottom-right .arrow {
     left: 50%;
     margin-left: -@popoverArrowOuterWidth;
     border-top-width: 0;
@@ -128,6 +128,14 @@
       border-left-color: @popoverArrowColor;
       bottom: -@popoverArrowWidth;
     }
+  }
+
+  &.top-left .arrow, &.bottom-left .arrow {
+    right:20px;
+    left:auto;
+  }
+  &.top-right .arrow, &.bottom-right .arrow {
+    left:20px;
   }
 
 }

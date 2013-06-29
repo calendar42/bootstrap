@@ -162,6 +162,20 @@
           case 'right':
             tp = {top: pos.top + pos.height / 2 - actualHeight / 2, left: pos.left + pos.width}
             break
+
+          // extended placements, adapted from https://github.com/dkleehammer/bootstrap-popover-extra-placements/blob/master/source/popover-extra-placements.js
+          case 'top-left':
+            tp = {top: pos.top - actualHeight,  left: pos.left + pos.width / 2 - (actualWidth - 30)};
+            break;
+          case 'top-right':
+            tp = {top: pos.top - actualHeight, left: pos.left + pos.width / 2 - 20};
+            break;
+          case 'bottom-left':
+            tp = {top: pos.top + pos.height, left: pos.left + pos.width / 2 - (actualWidth - 30)};
+            break;
+          case 'bottom-right':
+            tp = {top: pos.top + pos.height, left: pos.left + pos.width / 2 - 20};
+            break;
         }
 
         this.applyPlacement(tp, placement)
