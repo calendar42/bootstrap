@@ -38,15 +38,28 @@
 
     constructor: Popover
 
-  , setContent: function () {
+  , setContent: function (target, callback) {
       var $tip = this.tip()
+        , that = this
         , title = this.getTitle()
-        , content = this.getContent()
 
-      $tip.find('.popover-title')[this.options.html ? 'html' : 'text'](title)
-      $tip.find('.popover-content')[this.options.html ? 'html' : 'text'](content)
-
-      $tip.removeClass('fade top bottom left right in')
+      // C42: Added the ability to have a setContent function that can return the content in a callback
+      if (this.options.setContent) {
+        this.options.setContent(target, function (out) {
+          $tip.find('.popover-content')[that.options.html ? 'html' : 'text'](out)
+          $tip.removeClass('fade in top bottom left right bottom-left bottom-right top-left top-right')
+          if (!!callback) {
+            callback();
+          }
+        });
+      } else {
+        $tip.find('.popover-title')[this.options.html ? 'html' : 'text'](title)
+        $tip.find('.popover-content')[this.options.html ? 'html' : 'text'](content)
+        $tip.removeClass('fade in top bottom left right bottom-left bottom-right top-left top-right')
+        if (!!callback) {
+          callback();
+        }
+      }
     }
 
   , hasContent: function () {

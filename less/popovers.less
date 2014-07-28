@@ -139,3 +139,16 @@
   }
 
 }
+
+.popover.with-inner-hover {
+  &.top .popover-content, &.top-left .popover-content, &.top-right .popover-content {
+    /* TRICK TO CREATE AN INVISIBLE AREA UNDERNEATH THE POPUP TO ENSURE THE POPUP STAYS OPEN WHILE MOVING THE MOUSE */
+    padding-bottom: 50px;
+    margin-bottom: -40px;
+  }
+  &.bottom .popover-content, &.bottom-content .popover-content, &.bottom-right .popover-content {
+    /* TRICK TO CREATE AN INVISIBLE AREA ON TOP OF THE POPUP TO ENSURE THE POPUP STAYS OPEN WHILE MOVING THE MOUSE */
+    padding-top: 50px;
+    margin-top: -40px; 
+  }
+}

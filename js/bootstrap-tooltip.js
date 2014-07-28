@@ -56,8 +56,9 @@
         } else if (trigger != 'manual') {
           eventIn = trigger == 'hover' ? 'mouseenter' : 'focus'
           eventOut = trigger == 'hover' ? 'mouseleave' : 'blur'
-          this.$element.on(eventIn + '.' + this.type, this.options.selector, $.proxy(this.enter, this))
-          this.$element.on(eventOut + '.' + this.type, this.options.selector, $.proxy(this.leave, this))
+          // C42: Made the event namespace more specific by adding the _[selector] to it
+          this.$element.on(eventIn + '.' + this.type + '_' + this.options.selector, this.options.selector, $.proxy(this.enter, this))
+          this.$element.on(eventOut + '.' + this.type + '_' + this.options.selector, this.options.selector, $.proxy(this.leave, this))
         }
       }
 
@@ -90,6 +91,11 @@
 
       self = $(e.currentTarget)[this.type](options).data(this.type)
 
+      // C42: Needed for delegated popovers to work properly
+      if (this.options.selector) {
+        self.options = this._options;
+      }
+
       if (!self.options.delay || !self.options.delay.show) return self.show()
 
       clearTimeout(this.timeout)
@@ -113,24 +119,36 @@
 
   , show: function () {
       var $tip
-        , pos
-        , actualWidth
-        , actualHeight
-        , placement
-        , tp
+        , that = this
         , e = $.Event('show')
 
       if (this.hasContent() && this.enabled) {
         this.$element.trigger(e)
         if (e.isDefaultPrevented()) return
         $tip = this.tip()
-        this.setContent()
 
-        if (this.options.animation) {
-          $tip.addClass('fade')
-        }
+        // C42: Made the setContent work with a callback
+        this.setContent(this.$element, function () {
+          if (that.options.animation) {
+            $tip.addClass('fade')
+          }
 
-        placement = typeof this.options.placement == 'function' ?
+          that.calculatePlacement();
+          that.$element.trigger('shown')
+        })
+
+      }
+    }
+  // C42: Extruded this function from show() so we can call it from outside
+  , calculatePlacement: function () {
+      var placement
+        , $tip
+        , pos
+        , actualWidth
+        , actualHeight
+        , tp;
+      $tip = this.tip();
+      placement = typeof this.options.placement == 'function' ?
           this.options.placement.call(this, $tip[0], this.$element[0]) :
           this.options.placement
 
@@ -151,7 +169,7 @@
 
         switch (placement) {
           case 'bottom':
-            tp = {top: pos.top + pos.height, left: pos.left + pos.width / 2 - actualWidth / 2}
+            tp = {top: pos.top + pos.height + 10, left: pos.left + pos.width / 2 - actualWidth / 2}
             break
           case 'top':
             tp = {top: pos.top - actualHeight, left: pos.left + pos.width / 2 - actualWidth / 2}
@@ -165,23 +183,21 @@
 
           // extended placements, adapted from https://github.com/dkleehammer/bootstrap-popover-extra-placements/blob/master/source/popover-extra-placements.js
           case 'top-left':
-            tp = {top: pos.top - actualHeight,  left: pos.left + pos.width / 2 - (actualWidth - 30)};
+            tp = {top: pos.top - actualHeight - 10,  left: pos.left + pos.width / 2 - (actualWidth - 30)};
             break;
           case 'top-right':
-            tp = {top: pos.top - actualHeight, left: pos.left + pos.width / 2 - 20};
+            tp = {top: pos.top - actualHeight - 10, left: pos.left + pos.width / 2 - 20};
             break;
           case 'bottom-left':
-            tp = {top: pos.top + pos.height, left: pos.left + pos.width / 2 - (actualWidth - 30)};
+            tp = {top: pos.top + pos.height + 10, left: pos.left + pos.width / 2 - (actualWidth - 30)};
             break;
           case 'bottom-right':
-            tp = {top: pos.top + pos.height, left: pos.left + pos.width / 2 - 20};
+            tp = {top: pos.top + pos.height + 10, left: pos.left + pos.width / 2 - 20};
             break;
         }
 
         this.applyPlacement(tp, placement)
-        this.$element.trigger('shown')
-      }
-    }
+  }
 
   , applyPlacement: function(offset, placement){
       var $tip = this.tip()
@@ -230,12 +246,15 @@
         .css(position, delta ? (50 * (1 - delta / dimension) + "%") : '')
     }
 
-  , setContent: function () {
+  , setContent: function ($element, callback) {
       var $tip = this.tip()
         , title = this.getTitle()
 
       $tip.find('.tooltip-inner')[this.options.html ? 'html' : 'text'](title)
-      $tip.removeClass('fade in top bottom left right')
+      $tip.removeClass('fade in top bottom left right top-left top-right bottom-left bottom-right')
+      if (!!callback) {
+        callback();
+      }
     }
 
   , hide: function () {
