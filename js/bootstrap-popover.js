@@ -41,7 +41,6 @@
   , setContent: function (target, callback) {
       var $tip = this.tip()
         , that = this
-        , title = this.getTitle()
 
       // C42: Added the ability to have a setContent function that can return the content in a callback
       if (this.options.setContent) {
@@ -53,6 +52,9 @@
           }
         });
       } else {
+        var title   = this.getTitle();
+        var content = this.getContent();
+
         $tip.find('.popover-title')[this.options.html ? 'html' : 'text'](title)
         $tip.find('.popover-content')[this.options.html ? 'html' : 'text'](content)
         $tip.removeClass('fade in top bottom left right bottom-left bottom-right top-left top-right')
