@@ -40,9 +40,9 @@
   }
 }
 
-@media (max-width: 1253px) {
+@media (max-width: 1294px) {
   #calendar-nav .navbar .navbar-inner {
-    .user-filter-button-text{
+    .user-filter-button-text, .everyone-filter-button-text{
       display: none;
     }
     a.btn,
@@ -51,6 +51,15 @@
         padding-left: 8px !important;
         padding-right: 8px !important;
         // .btn-mini();
+    }
+    .jumpButton{
+      /* the icon should be only shown when the screen is small*/
+      .icon{
+        display: block;
+      }
+      .jumpButton-text{
+        display: none;
+      }
     }
   }
 }
