@@ -1,5 +1,5 @@
 /* ===========================================================
- * bootstrap-tooltip.js v2.0.4
+ * bootstrap-tooltip.js v2.3.2
  * http://twitter.github.com/bootstrap/javascript.html#tooltips
  * Inspired by the original jQuery.tipsy by Jason Frame
  * ===========================================================
@@ -38,19 +38,28 @@
   , init: function (type, element, options) {
       var eventIn
         , eventOut
+        , triggers
+        , trigger
+        , i
 
       this.type = type
       this.$element = $(element)
       this.options = this.getOptions(options)
       this.enabled = true
 
-      if (this.options.trigger == 'click') {
-        this.$element.on('click.' + this.type, this.options.selector, $.proxy(this.toggle, this))
-      } else if (this.options.trigger != 'manual') {
-        eventIn  = this.options.trigger == 'hover' ? 'mouseenter' : 'focus'
-        eventOut = this.options.trigger == 'hover' ? 'mouseleave' : 'blur'
-        this.$element.on(eventIn + '.' + this.type, this.options.selector, $.proxy(this.enter, this))
-        this.$element.on(eventOut + '.' + this.type, this.options.selector, $.proxy(this.leave, this))
+      triggers = this.options.trigger.split(' ')
+
+      for (i = triggers.length; i--;) {
+        trigger = triggers[i]
+        if (trigger == 'click') {
+          this.$element.on('click.' + this.type, this.options.selector, $.proxy(this.toggle, this))
+        } else if (trigger != 'manual') {
+          eventIn = trigger == 'hover' ? 'mouseenter' : 'focus'
+          eventOut = trigger == 'hover' ? 'mouseleave' : 'blur'
+          // C42: Made the event namespace more specific by adding the _[selector] to it
+          this.$element.on(eventIn + '.' + this.type + '_' + this.options.selector, this.options.selector, $.proxy(this.enter, this))
+          this.$element.on(eventOut + '.' + this.type + '_' + this.options.selector, this.options.selector, $.proxy(this.leave, this))
+        }
       }
 
       this.options.selector ?
@@ -59,7 +68,7 @@
     }
 
   , getOptions: function (options) {
-      options = $.extend({}, $.fn[this.type].defaults, options, this.$element.data())
+      options = $.extend({}, $.fn[this.type].defaults, this.$element.data(), options)
 
       if (options.delay && typeof options.delay == 'number') {
         options.delay = {
@@ -72,7 +81,20 @@
     }
 
   , enter: function (e) {
-      var self = $(e.currentTarget)[this.type](this._options).data(this.type)
+      var defaults = $.fn[this.type].defaults
+        , options = {}
+        , self
+
+      this._options && $.each(this._options, function (key, value) {
+        if (defaults[key] != value) options[key] = value
+      }, this)
+
+      self = $(e.currentTarget)[this.type](options).data(this.type)
+
+      // C42: Needed for delegated popovers to work properly
+      if (this.options.selector) {
+        self.options = this._options;
+      }
 
       if (!self.options.delay || !self.options.delay.show) return self.show()
 
@@ -97,61 +119,60 @@
 
   , show: function () {
       var $tip
-        , inside
+        , that = this
+        , e = $.Event('show')
+
+      if (this.hasContent() && this.enabled) {
+        this.$element.trigger(e)
+        if (e.isDefaultPrevented()) return
+        $tip = this.tip()
+
+        // C42: Made the setContent work with a callback
+        this.setContent(this.$element, function () {
+          if (that.options.animation) {
+            $tip.addClass('fade')
+          }
+
+          that.calculatePlacement();
+          that.$element.trigger('shown')
+        })
+
+      }
+    }
+  // C42: Extruded this function from show() so we can call it from outside
+  , calculatePlacement: function () {
+      var placement
+        , $tip
         , pos
         , actualWidth
         , actualHeight
-        , placement
-        , tp
-
-      if (this.hasContent() && this.enabled) {
-        $tip = this.tip()
-        this.setContent()
-
-        if (this.options.animation) {
-          $tip.addClass('fade')
-        }
-
-        placement = typeof this.options.placement == 'function' ?
+        , tp;
+      $tip = this.tip();
+      placement = typeof this.options.placement == 'function' ?
           this.options.placement.call(this, $tip[0], this.$element[0]) :
           this.options.placement
 
-        inside = /in/.test(placement)
-
         $tip
-          .remove()
+          .detach()
           .css({ top: 0, left: 0, display: 'block' })
-          .appendTo(inside ? this.$element : document.body)
 
-        pos = this.getPosition(inside)
-        
+        if (this.options.inside) {
+          $tip.appendTo(this.$element)
+        } else {
+          this.options.container ? $tip.appendTo(this.options.container) : $tip.insertAfter(this.$element)
+        }
+
+        pos = this.getPosition()
+
         actualWidth = $tip[0].offsetWidth
         actualHeight = $tip[0].offsetHeight
-        
 
-         var posLeft;
-         var placementStr = inside ? placement.split(' ')[1] : placement;
-         if (placementStr === 'top' || placementStr === 'bottom') {
-              
-              if ( (actualWidth/2) >= (pos.left + (pos.width/2)) ) {
-                  
-                  posLeft = 3;
-                  // find #popoverArrow.top and addClass pull-arrow-left
-                  $tip.addClass('pull-arrow-left');
-              
-            } else {
-              posLeft = pos.left + pos.width / 2 - actualWidth / 2;
-            }
-         }
-
-        switch (placementStr) {
+        switch (placement) {
           case 'bottom':
-            // tp = {top: pos.top + pos.height, left: pos.left + pos.width / 2 - actualWidth / 2}
-            tp = {top: pos.top + pos.height, left: posLeft}
+            tp = {top: pos.top + pos.height + 10, left: pos.left + pos.width / 2 - actualWidth / 2}
             break
           case 'top':
-            // tp = {top: pos.top - actualHeight, left: pos.left + pos.width / 2 - actualWidth / 2}
-            tp = {top: pos.top - actualHeight, left: posLeft}
+            tp = {top: pos.top - actualHeight, left: pos.left + pos.width / 2 - actualWidth / 2}
             break
           case 'left':
             tp = {top: pos.top + pos.height / 2 - actualHeight / 2, left: pos.left - actualWidth}
@@ -159,43 +180,109 @@
           case 'right':
             tp = {top: pos.top + pos.height / 2 - actualHeight / 2, left: pos.left + pos.width}
             break
+
+          // extended placements, adapted from https://github.com/dkleehammer/bootstrap-popover-extra-placements/blob/master/source/popover-extra-placements.js
+          case 'top-left':
+            tp = {top: pos.top - actualHeight - 10,  left: pos.left + pos.width / 2 - (actualWidth - 30)};
+            break;
+          case 'top-right':
+            tp = {top: pos.top - actualHeight - 10, left: pos.left + pos.width / 2 - 20};
+            break;
+          case 'bottom-left':
+            tp = {top: pos.top + pos.height + 10, left: pos.left + pos.width / 2 - (actualWidth - 30)};
+            break;
+          case 'bottom-right':
+            tp = {top: pos.top + pos.height + 10, left: pos.left + pos.width / 2 - 20};
+            break;
         }
 
-        $tip
-          .css(tp)
-          .addClass(placement)
-          .addClass('in')
+        this.applyPlacement(tp, placement)
+  }
+
+  , applyPlacement: function(offset, placement){
+      var $tip = this.tip()
+        , width = $tip[0].offsetWidth
+        , height = $tip[0].offsetHeight
+        , actualWidth
+        , actualHeight
+        , delta
+        , replace
+
+      $tip
+        .offset(offset)
+        .addClass(placement)
+        .addClass('in')
+
+      actualWidth = $tip[0].offsetWidth
+      actualHeight = $tip[0].offsetHeight
+
+      if (placement == 'top' && actualHeight != height) {
+        offset.top = offset.top + height - actualHeight
+        replace = true
       }
+
+      if (placement == 'bottom' || placement == 'top') {
+        delta = 0
+
+        if (offset.left < 0){
+          delta = offset.left * -2
+          offset.left = 0
+          $tip.offset(offset)
+          actualWidth = $tip[0].offsetWidth
+          actualHeight = $tip[0].offsetHeight
+        }
+
+        this.replaceArrow(delta - width + actualWidth, actualWidth, 'left')
+      } else {
+        this.replaceArrow(actualHeight - height, actualHeight, 'top')
+      }
+
+      if (replace) $tip.offset(offset)
     }
 
-  , setContent: function () {
+  , replaceArrow: function(delta, dimension, position){
+      this
+        .arrow()
+        .css(position, delta ? (50 * (1 - delta / dimension) + "%") : '')
+    }
+
+  , setContent: function ($element, callback) {
       var $tip = this.tip()
         , title = this.getTitle()
 
       $tip.find('.tooltip-inner')[this.options.html ? 'html' : 'text'](title)
-      $tip.removeClass('fade in top bottom left right')
+      $tip.removeClass('fade in top bottom left right top-left top-right bottom-left bottom-right')
+      if (!!callback) {
+        callback();
+      }
     }
 
   , hide: function () {
       var that = this
         , $tip = this.tip()
+        , e = $.Event('hide')
+
+      this.$element.trigger(e)
+      if (e.isDefaultPrevented()) return
 
       $tip.removeClass('in')
 
       function removeWithAnimation() {
         var timeout = setTimeout(function () {
-          $tip.off($.support.transition.end).remove()
+          $tip.off($.support.transition.end).detach()
         }, 500)
 
         $tip.one($.support.transition.end, function () {
           clearTimeout(timeout)
-          $tip.remove()
+          $tip.detach()
         })
       }
 
       $.support.transition && this.$tip.hasClass('fade') ?
         removeWithAnimation() :
-        $tip.remove()
+        $tip.detach()
+
+      this.$element.trigger('hidden')
 
       return this
     }
@@ -203,7 +290,7 @@
   , fixTitle: function () {
       var $e = this.$element
       if ($e.attr('title') || typeof($e.attr('data-original-title')) != 'string') {
-        $e.attr('data-original-title', $e.attr('title') || '').removeAttr('title')
+        $e.attr('data-original-title', $e.attr('title') || '').attr('title', '')
       }
     }
 
@@ -211,11 +298,12 @@
       return this.getTitle()
     }
 
-  , getPosition: function (inside) {
-      return $.extend({}, (inside ? {top: 0, left: 0} : this.$element.offset()), {
-        width: this.$element[0].offsetWidth
-      , height: this.$element[0].offsetHeight
-      })
+  , getPosition: function () {
+      var el = this.$element[0]
+      return $.extend({}, (typeof el.getBoundingClientRect == 'function') ? el.getBoundingClientRect() : {
+        width: el.offsetWidth
+      , height: el.offsetHeight
+      }, this.$element.offset())
     }
 
   , getTitle: function () {
@@ -231,6 +319,10 @@
 
   , tip: function () {
       return this.$tip = this.$tip || $(this.options.template)
+    }
+
+  , arrow: function(){
+      return this.$arrow = this.$arrow || this.tip().find(".tooltip-arrow")
     }
 
   , validate: function () {
@@ -253,8 +345,9 @@
       this.enabled = !this.enabled
     }
 
-  , toggle: function () {
-      this[this.tip().hasClass('in') ? 'hide' : 'show']()
+  , toggle: function (e) {
+      var self = e ? $(e.currentTarget)[this.type](this._options).data(this.type) : this
+      self.tip().hasClass('in') ? self.hide() : self.show()
     }
 
   , destroy: function () {
@@ -266,6 +359,8 @@
 
  /* TOOLTIP PLUGIN DEFINITION
   * ========================= */
+
+  var old = $.fn.tooltip
 
   $.fn.tooltip = function ( option ) {
     return this.each(function () {
@@ -284,10 +379,20 @@
   , placement: 'top'
   , selector: false
   , template: '<div class="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner"></div></div>'
-  , trigger: 'hover'
+  , trigger: 'hover focus'
   , title: ''
   , delay: 0
-  , html: true
+  , html: false
+  , container: false
+  }
+
+
+ /* TOOLTIP NO CONFLICT
+  * =================== */
+
+  $.fn.tooltip.noConflict = function () {
+    $.fn.tooltip = old
+    return this
   }
 
 }(window.jQuery);

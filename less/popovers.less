@@ -16,10 +16,10 @@
   -webkit-background-clip: padding-box;
      -moz-background-clip: padding;
           background-clip: padding-box;
-  border: 1px solid #ccc;
-  border: 1px solid rgba(0,0,0,.2);
+  // border: 1px solid #ccc;
+  // border: 1px solid rgba(0,0,0,.2);
   .border-radius(3px);
-  .box-shadow(0 5px 10px rgba(0,0,0,.2));
+  .box-shadow(0 5px 18px rgba(0,0,0,.2));
 
   // Overrides for proper insertion
   white-space: normal;
@@ -72,7 +72,7 @@
 }
 
 .popover {
-  &.top .arrow {
+  &.top .arrow, &.top-left .arrow, &.top-right .arrow {
     left: 50%;
     margin-left: -@popoverArrowOuterWidth;
     border-bottom-width: 0;
@@ -100,7 +100,7 @@
       border-right-color: @popoverArrowColor;
     }
   }
-  &.bottom .arrow {
+  &.bottom .arrow, &.bottom-left .arrow, &.bottom-right .arrow {
     left: 50%;
     margin-left: -@popoverArrowOuterWidth;
     border-top-width: 0;
@@ -130,4 +130,25 @@
     }
   }
 
+  &.top-left .arrow, &.bottom-left .arrow {
+    right:20px;
+    left:auto;
+  }
+  &.top-right .arrow, &.bottom-right .arrow {
+    left:20px;
+  }
+
+}
+
+.popover.with-inner-hover {
+  &.top .popover-content, &.top-left .popover-content, &.top-right .popover-content {
+    /* TRICK TO CREATE AN INVISIBLE AREA UNDERNEATH THE POPUP TO ENSURE THE POPUP STAYS OPEN WHILE MOVING THE MOUSE */
+    padding-bottom: 50px;
+    margin-bottom: -40px;
+  }
+  &.bottom .popover-content, &.bottom-content .popover-content, &.bottom-right .popover-content {
+    /* TRICK TO CREATE AN INVISIBLE AREA ON TOP OF THE POPUP TO ENSURE THE POPUP STAYS OPEN WHILE MOVING THE MOUSE */
+    padding-top: 50px;
+    margin-top: -40px; 
+  }
 }

@@ -1,5 +1,5 @@
 /* ===========================================================
- * bootstrap-popover.js v2.2.1
+ * bootstrap-popover.js v2.3.2
  * http://twitter.github.com/bootstrap/javascript.html#popovers
  * ===========================================================
  * Copyright 2012 Twitter, Inc.
@@ -26,7 +26,7 @@
  /* POPOVER PUBLIC CLASS DEFINITION
   * =============================== */
 
-  var Popover = function ( element, options ) {
+  var Popover = function (element, options) {
     this.init('popover', element, options)
   }
 
@@ -38,15 +38,30 @@
 
     constructor: Popover
 
-  , setContent: function () {
+  , setContent: function (target, callback) {
       var $tip = this.tip()
-        , title = this.getTitle()
-        , content = this.getContent()
+        , that = this
 
-      $tip.find('.popover-title')[this.options.html ? 'html' : 'text'](title)
-      $tip.find('.popover-content > *')[this.options.html ? 'html' : 'text'](content)
+      // C42: Added the ability to have a setContent function that can return the content in a callback
+      if (this.options.setContent) {
+        this.options.setContent(target, function (out) {
+          $tip.find('.popover-content')[that.options.html ? 'html' : 'text'](out)
+          $tip.removeClass('fade in top bottom left right bottom-left bottom-right top-left top-right')
+          if (!!callback) {
+            callback();
+          }
+        });
+      } else {
+        var title   = this.getTitle();
+        var content = this.getContent();
 
-      $tip.removeClass('fade top bottom left right in')
+        $tip.find('.popover-title')[this.options.html ? 'html' : 'text'](title)
+        $tip.find('.popover-content')[this.options.html ? 'html' : 'text'](content)
+        $tip.removeClass('fade in top bottom left right bottom-left bottom-right top-left top-right')
+        if (!!callback) {
+          callback();
+        }
+      }
     }
 
   , hasContent: function () {
@@ -58,8 +73,8 @@
         , $e = this.$element
         , o = this.options
 
-      content = $e.attr('data-content')
-        || (typeof o.content == 'function' ? o.content.call($e[0]) :  o.content)
+      content = (typeof o.content == 'function' ? o.content.call($e[0]) :  o.content)
+        || $e.attr('data-content')
 
       return content
     }
@@ -81,6 +96,8 @@
  /* POPOVER PLUGIN DEFINITION
   * ======================= */
 
+  var old = $.fn.popover
+
   $.fn.popover = function (option) {
     return this.each(function () {
       var $this = $(this)
@@ -97,7 +114,16 @@
     placement: 'right'
   , trigger: 'click'
   , content: ''
-  , template: '<div class="popover"><div class="arrow"></div><div class="popover-inner"><h3 class="popover-title"></h3><div class="popover-content"><p></p></div></div></div>'
+  , template: '<div class="popover"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>'
   })
+
+
+ /* POPOVER NO CONFLICT
+  * =================== */
+
+  $.fn.popover.noConflict = function () {
+    $.fn.popover = old
+    return this
+  }
 
 }(window.jQuery);

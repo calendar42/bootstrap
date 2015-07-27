@@ -126,23 +126,20 @@ input[type="tel"],
 input[type="color"],
 .uneditable-input {
   background-color: @inputBackground;
-  border: 1px solid @inputBorder;
-  .border-radius(@inputBorderRadius);
+  border: 1px solid @color-gray;
+  border-width: 0 0 1px 0 !important;
   border-top: none;
   border-left: none;
   border-right: none;
 
   &.onhover-showedit {
-    border: 1px solid transparent;
     @transition: border linear .1s;
     .transition(@transition);
     &:hover {
-      border: 1px solid hsla(0,0%,0%, 0.3) !important;
-      .border-radius(3px);
+      border-bottom: 1px solid hsla(0,0%,0%, 0.3) !important;
     }
     &:focus{
-      border: 1px solid hsla(0,0%,0%, 0.5) !important; 
-      .border-radius(3px);
+      border-bottom: 1px solid @color-blue !important; 
     }
   }
 
@@ -524,14 +521,14 @@ select:focus:invalid {
     width: auto;
     height: @baseLineHeight;
     min-width: 16px;
-    padding: 4px 5px;
+    padding: 4px 2px 4px 0;
     font-size: @baseFontSize;
     font-weight: normal;
     line-height: @baseLineHeight;
     text-align: center;
-    text-shadow: 0 1px 0 @white;
-    background-color: @grayLighter;
-    border: 1px solid #ccc;
+    // text-shadow: 0 1px 0 @white;
+    // background-color: @grayLighter;
+    // border: 1px solid #ccc;
   }
   .add-on,
   .btn,
@@ -720,10 +717,11 @@ legend + .control-group {
   }
   // Float the labels left
   .control-label {
+    width: 140px;
     float: left;
     width: @horizontalComponentOffset - 20;
     padding-top: 5px;
-    text-align: right;
+    text-align: left;
   }
   // Move over all input controls and content
   .controls {
@@ -735,6 +733,10 @@ legend + .control-group {
     *margin-left: 0;
     &:first-child {
       *padding-left: @horizontalComponentOffset;
+    }
+
+    &.inline a.btn{
+      margin-left: 30px;
     }
   }
   // Remove bottom margin on block level help text since that's accounted for on .control-group

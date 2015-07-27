@@ -1,7 +1,7 @@
 // PORTRAIT TABLET TO DEFAULT DESKTOP
 // ----------------------------------
 
-@media (max-width: 1100px) {
+@media (max-width: 1185px) {
 
   // Fixed grid
   #grid > .core(42px, 20px);
@@ -15,14 +15,6 @@
   // No need to reset .thumbnails here since it's the same @gridGutterWidth
 
   #calendar-nav .navbar .navbar-inner {
-
-    a.btn,
-    .txt {
-        font-size: 13px !important;
-        padding-left: 8px !important;
-        padding-right: 8px !important;
-        // .btn-mini();
-    }
 
     h1 {
       font-size: 18px !important;
@@ -44,6 +36,30 @@
     }
     span.normal-txt {
       display: none;
+    }
+  }
+}
+
+@media (max-width: 1294px) {
+  #calendar-nav .navbar .navbar-inner {
+    .user-filter-button-text, .everyone-filter-button-text{
+      display: none;
+    }
+    a.btn,
+    .txt {
+        font-size: 13px !important;
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+        // .btn-mini();
+    }
+    .jumpButton{
+      /* the icon should be only shown when the screen is small*/
+      .icon{
+        display: block;
+      }
+      .jumpButton-text{
+        display: none;
+      }
     }
   }
 }
